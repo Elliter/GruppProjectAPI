@@ -1,20 +1,27 @@
-using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using GruppProjectAPI.Business;
+using GruppProjectAPI.Moduler;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GruppProjectAPI.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly WeatherManager _manager;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public List<WeatherResponse> WeatherList { get; set; }
+        public double AverageTemp { get; set; }
+
+        public IndexModel(WeatherManager manager)
         {
-            _logger = logger;
+            _manager = manager;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-
+            var cities = new List<string> { "Stockholm", "Gothenburg", "Malmo" };
+            (WeatherList, AverageTemp) = await _manager.GetMultipleWeathersAsync(cities);
         }
     }
 }

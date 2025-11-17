@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GruppProjectAPI.Business;
 using GruppProjectAPI.Moduler;
@@ -20,7 +20,7 @@ namespace GruppProjectAPI.Pages
 
         public async Task OnGet()
         {
-            var cities = new List<string> { "Stockholm", "Gothenburg", "Malmo" };
+            var cities = new List<string> { "Stockholm", "Gothenburg", "Borås" };
             (WeatherList, AverageTemp) = await _manager.GetMultipleWeathersAsync(cities);
         }
     }

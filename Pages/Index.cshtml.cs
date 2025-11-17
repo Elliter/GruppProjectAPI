@@ -20,7 +20,7 @@ namespace GruppProjectAPI.Pages
 
         public async Task OnGet()
         {
-            var cities = new List<string> { "Stockholm", "Göteborg", "Borås" };
+            var cities = new List<string> { "Göteborg", "Borås" };
             (WeatherList, AverageTemp) = await _manager.GetMultipleWeathersAsync(cities);
         }
     }

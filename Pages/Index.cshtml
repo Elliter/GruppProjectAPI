@@ -1,9 +1,14 @@
 ﻿@page
-@model WeatherApp.Pages.IndexModel
+@model GruppProjectAPI.Pages.IndexModel
 
 <h1>Väder i mitt stad "Borås" på senaste 7 dagar</h1>
 
 @if (Model.Failed)
 {
 	<p style="color:orange;">Fel från att ta ut data från API.</p>
+}
+else
+{
+	<p><b>Average temperatur:</b> @Model.AvgTemp Grader</p>
+	<p><b>Average nederbörd:</b> @Model.AvgRain mm per dag</p>
 }

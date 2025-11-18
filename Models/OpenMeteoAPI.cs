@@ -1,7 +1,6 @@
 ﻿namespace GruppProjectAPI.Models
 {
-    public class HistorisktRespons
+    public class OpenMeteoAPI
     {
-        
     }
 }

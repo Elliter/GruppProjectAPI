@@ -1,23 +1,9 @@
 ﻿@page
-@model GruppProjectAPI.Pages.IndexModel
+@model WeatherApp.Pages.IndexModel
 
-<h1>Weather Aggregator</h1>
+<h1>Väder i mitt stad "Borås" på senaste 7 dagar</h1>
 
-@if (Model.WeatherList != null)
+@if (Model.Failed)
 {
-    <ul>
-        @foreach (var w in Model.WeatherList)
-        {
-            <li>
-                <b>@w.location.name</b>: @w.current.temperature °C,
-                @w.current.weather_descriptions[0]
-            </li>
-        }
-    </ul>
-
-    <p><b>Genomsnittstemperatur:</b> @Model.AverageTemp °C</p>
-}
-else
-{
-    <p>Laddar väderdata...</p>
+	<p style="color:orange;">Fel från att ta ut data från API.</p>
 }

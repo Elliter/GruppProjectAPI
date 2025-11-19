@@ -7,7 +7,7 @@ namespace GruppProjectAPI.Pages
     public class IndexModel : PageModel
     {
         private readonly WeatherAggregator _agg;
-        public double AvgTemp { get; set; }
+        public double AvgTemperatur { get; set; }
         public double AvgRain { get; set; }
         public bool Failed { get; set; }
 
@@ -15,7 +15,13 @@ namespace GruppProjectAPI.Pages
 
         public async Task OnGet()
         {
-
+            try
+            {
+                var r = await _agg.GetWeeklyAverages();
+                AvgTemperatur = r.AvgTemperatur;
+                AvgRain = r.avgRain;
+            }
+            catch { Failed = true; }
         }
     }
 }

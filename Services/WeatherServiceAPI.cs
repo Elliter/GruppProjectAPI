@@ -17,15 +17,42 @@ namespace GruppProjectAPI.Services
 
         public WeatherService(HttpClient http, IConfiguration config)
         {
+            _http = http;
+            _location = config.GetValue<string>("WeatherStack:Location") ?? "Boras";
+        }
+
+        public async Task<GruppProjectAPI?> GetWeeklyFromOpenMeteoAsync()
+        {
             var end = DateTime.UtcNow.Date;
-            var start = end.AddDays(-7);
+            var start = end.AddDays(-6);
             string s = start.ToString("yyyy-MM-dd");
             string e = end.ToString("yyyy-MM-dd");
 
-            _http = http;
-            _location = config.GetValue<string>("WeatherStack:Location") ?? "Boras";
-
             var url = $"https://archive-api.open-meteo.com/v1/archive?latitude={Latitude}&longitude={Longitude}&start_date={s}&end_date={e}&hourly=temperature_2m,precipitation&timezone=Europe%2FStockholm";
+
+            try
+            {
+                var res = await _http.GetAsync(url);
+                res.EnsureSuccessStatusCode();
+                var json = await res.Content.ReadAsStringAsync();
+
+                var data = JsonSerializer.Deserialize<OpenMeteoAPI>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                if (data?.Hourly?.Temperature2m == null) return null;
+
+                double avgTemp = data.Hourly.Temperature2m.Average();
+                double totalPrec = data.Hourly.Precipitation?.Sum() ?? 0;
+                int days = (end - start).Days + 1;
+                double avgDaily = totalPrec / days;
+
+                return new GruppProjectAPI
+                {
+                    Temperature = Math.Round(avgTemp, 2),
+                    Precipitation = Math.Round(avgDaily, 2)
+                };
+            }
+            catch { return null; }
         }
+
+        public Task<GruppProjectAPI?> GetWeatherForDate(string d) => GetWeeklyFromOpenMeteoAsync();
     }
 }

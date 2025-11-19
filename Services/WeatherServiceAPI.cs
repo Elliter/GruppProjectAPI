@@ -21,7 +21,7 @@ namespace GruppProjectAPI.Services
             _location = config.GetValue<string>("WeatherStack:Location") ?? "Boras";
         }
 
-        public async Task<GruppProjectAPI?> GetWeeklyFromOpenMeteoAsync()
+        public async Task<WeatherDayAPI?> GetWeeklyFromOpenMeteoAsync()
         {
             var end = DateTime.UtcNow.Date;
             var start = end.AddDays(-6);
@@ -44,7 +44,7 @@ namespace GruppProjectAPI.Services
                 int days = (end - start).Days + 1;
                 double avgDaily = totalPrec / days;
 
-                return new GruppProjectAPI
+                return new WeatherDayAPI
                 {
                     Temperature = Math.Round(avgTemp, 2),
                     Precipitation = Math.Round(avgDaily, 2)
@@ -53,6 +53,6 @@ namespace GruppProjectAPI.Services
             catch { return null; }
         }
 
-        public Task<GruppProjectAPI?> GetWeatherForDate(string d) => GetWeeklyFromOpenMeteoAsync();
+        public Task<WeatherDayAPI?> GetWeatherForDate(string d) => GetWeeklyFromOpenMeteoAsync();
     }
 }

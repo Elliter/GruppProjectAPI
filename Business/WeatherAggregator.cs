@@ -8,7 +8,7 @@ namespace GruppProjectAPI.Business
         private readonly WeatherServiceAPI _service;
         public WeatherAggregator(WeatherServiceAPI service) { _service = service; }
 
-        public async Task<(double avgTemp, double avgRain)> GetWeeklyAverages()
+        public async Task<(double avgTemperatur, double avgRain)> GetWeeklyAverages()
         {
             var w = await _service.GetWeeklyFromOpenMeteoAsync();
             if (w == null) 

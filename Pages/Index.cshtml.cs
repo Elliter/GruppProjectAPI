@@ -18,7 +18,7 @@ namespace GruppProjectAPI.Pages
             try
             {
                 var r = await _agg.GetWeeklyAverages();
-                AvgTemperatur = r.AvgTemperatur;
+                AvgTemperatur = r.avgTemperatur;
                 AvgRain = r.avgRain;
             }
             catch { Failed = true; }

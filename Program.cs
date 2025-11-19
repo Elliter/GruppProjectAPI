@@ -2,9 +2,8 @@ using GruppProjectAPI.Business;
 using GruppProjectAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 builder.Services.AddRazorPages();
+
 
 
 // Inject interface, NOT concrete class
@@ -33,10 +32,17 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+
 app.UseAuthorization();
 
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/weather");
+    return Task.CompletedTask;
+});
 
 app.Run();

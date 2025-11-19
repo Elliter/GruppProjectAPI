@@ -1,4 +1,4 @@
-namespace WeatherAPIRazor.Models
+namespace GruppProjectAPI.Models
 {
     public abstract class BaseWeather
     {

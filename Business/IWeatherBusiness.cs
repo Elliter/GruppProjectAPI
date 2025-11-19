@@ -1,4 +1,4 @@
-﻿namespace WeatherAPIRazor.Business
+﻿namespace GruppProjectAPI.Business
 {
     public interface IWeatherBusiness
     {

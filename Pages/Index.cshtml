@@ -1,23 +1,10 @@
 ﻿@page
-@model GruppProjectAPI.Pages.IndexModel
-
-<h1>Weather Aggregator</h1>
-
-@if (Model.WeatherList != null)
-{
-    <ul>
-        @foreach (var w in Model.WeatherList)
-        {
-            <li>
-                <b>@w.location.name</b>: @w.current.temperature °C,
-                @w.current.weather_descriptions[0]
-            </li>
-        }
-    </ul>
-
-    <p><b>Genomsnittstemperatur:</b> @Model.AverageTemp °C</p>
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
 }
-else
-{
-    <p>Laddar väderdata...</p>
-}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

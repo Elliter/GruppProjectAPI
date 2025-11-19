@@ -1,7 +1,8 @@
-﻿using System.Text.Json;
-using WeatherAPIRazor.Models;
+﻿using GruppProjectAPI.Models;
+using System;
+using System.Text.Json;
 
-namespace WeatherAPIRazor.Services
+namespace GruppProjectAPI.Services
 {
     public class PublicDataService : IPublicDataService
     {
@@ -18,7 +19,8 @@ namespace WeatherAPIRazor.Services
             string url =
                 $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={_apiKey}&units=metric";
 
-            var json = await _client.GetStringAsync(url);
+         
+                var json = await _client.GetStringAsync(url);
             var doc = JsonDocument.Parse(json);
 
             return new CurrentWeather
@@ -27,6 +29,7 @@ namespace WeatherAPIRazor.Services
                 Temperature = doc.RootElement.GetProperty("main").GetProperty("temp").GetSingle(),
                 Humidity = doc.RootElement.GetProperty("main").GetProperty("humidity").GetSingle()
             };
+            
         }
 
         public async Task<ForecastWeather> GetForecastAsync(string city)

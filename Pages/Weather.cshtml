@@ -1,83 +1,29 @@
 ﻿
-@{
-    ViewBag.Title = "Weather";
+
+
+@page
+@model GruppProjectAPI.Pages.WeatherModel
+
+<h2>Weather Search</h2>
+
+<form method="post">
+    <input type="text" asp-for="City" placeholder="Enter city" />
+    <button type="submit">Get Weather</button>
+</form>
+
+@if (Model.Result != null)
+{
+    <h3>Results for @Model.City</h3>
+
+    <p><b>Current Temp:</b> @Model.Result.CurrentTemp °C</p>
+    <p><b>Humidity:</b> @Model.Result.Humidity %</p>
+    <p><b>Forecast Avg Temp:</b> @Model.Result.ForecastAvgTemp °C</p>
+
+    <h4>Days hotter than average:</h4>
+    <ul>
+        @foreach (var t in Model.Result.FilteredForecastDays)
+        {
+            <li>@t °C</li>
+        }
+    </ul>
 }
-
-<h1>Get Weather Forecast</h1>
-
-<div>
-    <strong>City Name  :</strong><input id="txtCity" type="text"/>
-    <br />
-    <br />
-    <button id="btnSubmit">Get Weather Forecast</button>
-</div>
-
-
-<div>
-    <h2>Weather Forecast</h2>
-    <table>
-        <tr>
-            <td>Weather Symbol Icon <img id="imgWeatherIconUrl" src="" title="Weather Icon" /></td>
-        </tr>
-        <tr>
-            <td>
-                <strong>City: </strong>
-                <span id="lblCity"></span>&nbsp;&nbsp;,
-                <span id="lblCountry"></span>
-            </td>
-            </tr>
-        <tr>
-            <td>
-                <strong>Latitude: </strong>
-                <label id="lblLat"></label><br />
-                <strong>Longitude: </strong>
-                <label id="lblLon"></label>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Description:</strong>
-                <label id="lblDescription"></label><br />
-                <strong>Humidity:</strong>
-                <label id="lblHumidity"></label>
-            </td>
-            </tr>
-        <tr>
-            <td>
-                Temperature (Feels Like)<label id="lblTempFeelsLike"></label><br />
-                Temperature <label id="lblTemp"></label><br />
-                Temperature (Min)<label id="lblTempMin"></label><br />
-                Temperature (Max)<label id="lblTempMax"></label><br />
-            </td>
-        </tr>
-       
-
-    </table>
-</div>
-
-<script>
-    
-    $("#btnSubmit").click(function () {
-
-        var cityname = $("#txtCity").val();
-        if (cityname.length > 0)
-        {
-        $.ajax({
-            url: "http://localhost:52189/Home/WeatherDetail?City="+cityname,
-            type: "POST",
-            success: function (rsltval) {
-              
-            },
-            error: function () {
-
-            }
-        });
-        }
-        else
-        {
-            alert("City Not Found");
-        }
-    });
-
-</script>

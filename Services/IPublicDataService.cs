@@ -1,6 +1,6 @@
-﻿using WeatherAPIRazor.Models;
+﻿using GruppProjectAPI.Models;
 
-namespace WeatherAPIRazor.Services
+namespace GruppProjectAPI.Services
 {
     public interface IPublicDataService
     {

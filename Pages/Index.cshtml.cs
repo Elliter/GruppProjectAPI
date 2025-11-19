@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using System.Threading.Tasks;
 using GruppProjectAPI.Business;
 using GruppProjectAPI.Moduler;
@@ -24,4 +24,28 @@ namespace GruppProjectAPI.Pages
             (WeatherList, AverageTemp) = await _manager.GetMultipleWeathersAsync(cities);
         }
     }
+}*/
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace GruppProjectAPI.Pages
+{
+  
+    public class IndexModel : PageModel
+    {
+        private readonly ILogger<IndexModel> _logger;
+
+        public IndexModel(ILogger<IndexModel> logger)
+        {
+            _logger = logger;
+        }
+
+        public void OnGet()
+        {
+
+        }
+    }
+
 }
+

@@ -1,6 +1,6 @@
-﻿using WeatherAPIRazor.Services;
+﻿using GruppProjectAPI.Services;
 
-namespace WeatherAPIRazor.Business
+namespace GruppProjectAPI.Business
 {
     public class WeatherBusiness : IWeatherBusiness
     {

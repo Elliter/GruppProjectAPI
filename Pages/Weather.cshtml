@@ -1,0 +1,30 @@
+﻿
+
+
+@page
+@model WeatherModel
+
+<h2>Weather Forecast</h2>
+
+<form method="post">
+    <label>Latitude:</label>
+    <input asp-for="Latitude" />
+
+    <label>Longitude:</label>
+    <input asp-for="Longitude" />
+
+    <button type="submit">Get Weather</button>
+</form>
+
+@if (Model.Weather != null)
+{
+    <h3>Current Weather</h3>
+    <p>Temperature: @Model.Weather.Current_Weather?.Temperature °C</p>
+    <p>Wind: @Model.Weather.Current_Weather?.Windspeed m/s</p>
+
+    <h3>Mean temperature next 12 hours</h3>
+    <p>@Model.MeanNext12Hours °C</p>
+
+    <h3>Forecast model type (polymorphism)</h3>
+    <p>@Model.ForecastModel?.ForecastType</p>
+}

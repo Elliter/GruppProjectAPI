@@ -8,14 +8,14 @@ using GruppProjectAPI.Models;
 
 namespace GruppProjectAPI.Services
 {
-    public class WeatherService
+    public class WeatherServiceAPI
     {
         private readonly HttpClient _http;
         private const double Latitude = 57.72;
         private const double Longitude = 12.94;
         private readonly string _location;
 
-        public WeatherService(HttpClient http, IConfiguration config)
+        public WeatherServiceAPI(HttpClient http, IConfiguration config)
         {
             _http = http;
             _location = config.GetValue<string>("WeatherStack:Location") ?? "Boras";

@@ -1,11 +1,11 @@
 ﻿@page
 @model GruppProjectAPI.Pages.IndexModel
 
-<h1>Väder i mitt stad "Borås" på senaste 7 dagar</h1>
+<h1>Väder i Borås på senaste 7 dagar</h1>
 
 @if (Model.Failed)
 {
-	<p style="color:orange;">Fel från att ta ut data från API.</p>
+	<p style="color:orange;">Fel från att ta ut data från API. Försök senare</p>
 }
 else
 {

@@ -5,7 +5,7 @@ namespace GruppProjectAPI.Models
 {
     public class OpenMeteoAPI
     {
-        [JsonPropertyName("timmar")]
+        [JsonPropertyName("hourly")]
         public HourlyData Hourly { get; set; }
     }
 

@@ -11,11 +11,13 @@ namespace GruppProjectAPI.Models
 
     public class HourlyData
     {
-        [JsonPropertyName("tiden")]
+        [JsonPropertyName("time")]
         public List<string> Time { get; set; }
-        [JsonPropertyName("temperatur_2m")]
+        [JsonPropertyName("temperature_2m")]
         public List<double> Temperature2m { get; set; }
-        [JsonPropertyName("nederbörd")]
+        [JsonPropertyName("precipitation")]
         public List<double> Precipitation { get; set; }
     }
+
+    // här anropas från Open Meteo API till klasser ovan.
 }

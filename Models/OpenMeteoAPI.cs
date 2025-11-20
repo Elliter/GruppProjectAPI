@@ -20,4 +20,10 @@ namespace GruppProjectAPI.Models
     }
 
     // här anropas från Open Meteo API till klasser ovan.
+
+    public class WeatherDayAPI
+    {
+        public double Temperature { get; set; }
+        public double Precipitation { get; set; }
+    }
 }

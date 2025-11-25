@@ -16,13 +16,9 @@ namespace GruppProjectAPI.Business
             var current = await _service.GetCurrentWeatherAsync(city);
             var forecast = await _service.GetForecastAsync(city);
 
-            // Business Rule: Calculate average
             float avgForecast = forecast.DailyTemperatures.Average();
 
-            // Business Rule: Filter forecast > average
-            var filtered = forecast.DailyTemperatures
-                .Where(t => t > avgForecast)
-                .ToList();
+            var filtered = forecast.DailyTemperatures.Where(t => t > avgForecast).ToList();
 
             return new CombinedWeatherResult
             {

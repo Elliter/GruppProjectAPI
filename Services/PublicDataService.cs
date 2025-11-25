@@ -41,17 +41,31 @@ namespace GruppProjectAPI.Services
 
             var doc = JsonDocument.Parse(json);
             var list = doc.RootElement.GetProperty("list");
+           
+            Dictionary<DateTime, List<float>> dailyGroups = new();
 
-            var temps = new List<float>();
             foreach (var entry in list.EnumerateArray())
             {
-                temps.Add(entry.GetProperty("main").GetProperty("temp").GetSingle());
+                float temp = entry.GetProperty("main").GetProperty("temp").GetSingle();
+
+                string dtTxt = entry.GetProperty("dt_txt").GetString()!;
+
+                DateTime dt = DateTime.ParseExact(dtTxt,"yyyy-MM-dd HH:mm:ss",System.Globalization.CultureInfo.InvariantCulture);
+
+                DateTime day = dt.Date;
+
+                if (!dailyGroups.ContainsKey(day))
+                    dailyGroups[day] = new List<float>();
+
+                dailyGroups[day].Add(temp);
             }
+
+            List<float> dailyAverages = dailyGroups.Select(g => g.Value.Average()).ToList();
 
             return new ForecastWeather
             {
                 City = city,
-                DailyTemperatures = temps
+                DailyTemperatures = dailyAverages
             };
         }
     }

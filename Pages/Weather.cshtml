@@ -6,7 +6,7 @@
 
 <form method="post">
     <input type="text" asp-for="City" placeholder="Enter city" />
-    <button type="submit">Get Weather</button>
+    <button type="submit">Show Weather</button>
 </form>
 
 @if (Model.Result != null)
@@ -24,4 +24,8 @@
             <li>@t °C</li>
         }
     </ul>
+
+ 
+
+
 }

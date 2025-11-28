@@ -18,12 +18,16 @@
     <p><b>Forecast Avg Temp:</b> @Model.Result.ForecastAvgTemp °C</p>
 
     <h4>Days hotter than average:</h4>
-    <ul>
-        @foreach (var t in Model.Result.FilteredForecastDays)
-        {
-            <li>@t °C</li>
-        }
-    </ul>
+    
+
+        <ul>
+            @foreach (var item in Model.Result.FilteredForecastDays)
+            {
+                <li>@item.Day: @item.Temperature °C</li>
+            }
+        </ul>
+       
+ 
 
  
 

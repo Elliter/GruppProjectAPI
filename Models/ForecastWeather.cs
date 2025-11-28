@@ -2,9 +2,10 @@
 {
     public class ForecastWeather : BaseWeather
     {
+        public float Temperature { get; set; }
         public List<float> DailyTemperatures { get; set; } = new();
+        public List<string> DailyDays { get; set; } = new();
 
-        public override float GetPrimaryTemp() =>
-            DailyTemperatures.Count > 0 ? DailyTemperatures[0] : 0;
+        public override float GetPrimaryTemp() => Temperature;
     }
 }

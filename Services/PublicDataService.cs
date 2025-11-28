@@ -27,7 +27,7 @@ namespace GruppProjectAPI.Services
             {
                 City = city,
                 Temperature = doc.RootElement.GetProperty("main").GetProperty("temp").GetSingle(),
-                Humidity = doc.RootElement.GetProperty("main").GetProperty("humidity").GetSingle()
+                Humidity = doc.RootElement.GetProperty("main").GetProperty("humidity").GetSingle(),
             };
             
         }
@@ -43,6 +43,7 @@ namespace GruppProjectAPI.Services
             var list = doc.RootElement.GetProperty("list");
            
             Dictionary<DateTime, List<float>> dailyGroups = new();
+            List<string> days =new();
 
             foreach (var entry in list.EnumerateArray())
             {
@@ -58,14 +59,19 @@ namespace GruppProjectAPI.Services
                     dailyGroups[day] = new List<float>();
 
                 dailyGroups[day].Add(temp);
+                string dayName = dt.DayOfWeek.ToString();
+                if (!days.Contains(dayName))
+                    days.Add(dayName);
+
             }
 
-            List<float> dailyAverages = dailyGroups.Select(g => g.Value.Average()).ToList();
+            List<float> dailyAverages = dailyGroups.Select(g => g.Value.Average()).ToList(); 
 
             return new ForecastWeather
             {
                 City = city,
-                DailyTemperatures = dailyAverages
+                DailyTemperatures = dailyAverages,
+                DailyDays=days
             };
         }
     }

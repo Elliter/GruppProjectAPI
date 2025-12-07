@@ -1,23 +1,15 @@
 ﻿@page
 @model GruppProjectAPI.Pages.IndexModel
 
-<h1>Weather Aggregator</h1>
+<h1>Väder i Borås på senaste 7 dagar</h1>
 
-@if (Model.WeatherList != null)
+@if (Model.Failed)
 {
-    <ul>
-        @foreach (var w in Model.WeatherList)
-        {
-            <li>
-                <b>@w.location.name</b>: @w.current.temperature °C,
-                @w.current.weather_descriptions[0]
-            </li>
-        }
-    </ul>
-
-    <p><b>Genomsnittstemperatur:</b> @Model.AverageTemp °C</p>
+	<p style="color:orange;">Fel från att ta ut data från API. Försök senare</p>
 }
 else
 {
-    <p>Laddar väderdata...</p>
+	<p><b>Genomsnitt temperatur:</b> @Model.AvgTemperatur Grader</p>
+	<p>----------------------------------------------------------------------------------------</p>
+	<p><b>Genomsnitt nederbörd:</b> @Model.AvgRain mm per dag</p>
 }
